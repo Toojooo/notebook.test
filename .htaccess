@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} ^(.*/[^/\.]+)$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [R=301,L]
+
+# request uri
+RewriteCond %{HTTP_HOST} ^notebook\.test$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.) /api/v1/index.php%{REQUEST_URI}
